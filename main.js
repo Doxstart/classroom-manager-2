@@ -22,42 +22,44 @@ const classroom1 = new Classroom([student1, student2, student3, student4, studen
 
 let students1 = classroom1.students;
 
-function displayClassroom(students) {
-    document.getElementById('student-list').innerHTML = '';
-    for (let i = 0; i < students.length; i++) {
-        const element = students[i];
-        let studentList = document.getElementById('student-list');
-        let newLi = document.createElement('li');
-        const studentName = document.createTextNode(element.name + ' ' + element.surname);
-        newLi.appendChild(studentName)
-        if (element.isBirthday()) {
-            newLi.style.color = '#fafafa'
-            newLi.style.animationName = 'colorRotate';
-        }
-        const removeButton = document.createElement('button');
-        const buttonText = document.createTextNode('Rimuovi');
-        const br = document.createElement('br')
-        removeButton.appendChild(buttonText);
-        removeButton.addEventListener('click', (event) => removeStudent(element));
-        studentList.appendChild(newLi);
-        newLi.appendChild(br);
-        newLi.appendChild(removeButton);
-        studentList.appendChild(newLi);
-    }
-}
-
-// function displayClassroom2 () {
-//     const studentList = document.getElementById('student-list');
-
-//     for (let i = 0; i < classroom1.students.length; i++) {
-//         const element = classroom.students[i];
-//         studentList.innerHTML += `<li class = 'list-element'>${student.name} ${student.surname}<button>cancella </button></li>`
+// function displayClassroom(students) {
+//     document.getElementById('student-list').innerHTML = '';
+//     for (let i = 0; i < students.length; i++) {
+//         const element = students[i];
+//         let studentList = document.getElementById('student-list');
+//         let newLi = document.createElement('li');
+//         const studentName = document.createTextNode(element.name + ' ' + element.surname);
+//         newLi.appendChild(studentName)
+//         if (element.isBirthday()) {
+//             newLi.style.color = '#fafafa'
+//             newLi.style.animationName = 'colorRotate';
+//         }
+//         const removeButton = document.createElement('button');
+//         const buttonText = document.createTextNode('Rimuovi');
+//         const br = document.createElement('br')
+//         removeButton.appendChild(buttonText);
+//         removeButton.addEventListener('click', (event) => removeStudent(element));
+//         studentList.appendChild(newLi);
+//         newLi.appendChild(br);
+//         newLi.appendChild(removeButton);
+//         studentList.appendChild(newLi);
 //     }
 // }
 
+function displayClassroom2 () {
+    const studentList = document.getElementById('student-list');
+
+    for (let i = 0; i < students1.length; i++) {
+        const student = students1[i];
+        studentList.innerHTML += `<li class = 'list-element'>${student.name} ${student.surname}<br><button>rimuovi</button></li>`
+        removeButton.addEventListener('click', (event) => removeStudent(student));
+    }
+    
+}
+
 function shuffleTheClassroom() {
     shuffle(students1)
-    displayClassroom(students1)
+    displayClassroom2(students1)
 }
 
 function addStudentToClassroom() {
@@ -89,14 +91,14 @@ function addStudentToClassroom() {
         inputDate.value = 'inserire formato corretto'
     } else if ((inputName.value !== '' && inputSurname.value !== '') && (inputName.value !== 'inserire un nome' && inputSurname.value !== 'inserire un cognome')) {
         students.push(newStudent);
-        displayClassroom(classroom1.students)
+        displayClassroom2(classroom1.students)
         inputName.value = '';
         inputSurname.value = '';
         inputDate.value = '';
     }
 }
 
-displayClassroom(students1)
+displayClassroom2(students1)
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -129,5 +131,5 @@ function resetInputDateOnClick() {
 function removeStudent(student) {
     const studentIndex = students1.indexOf(student);
     students1.splice(studentIndex, 1);
-    displayClassroom(students1);
+    displayClassroom2(students1);
 }
